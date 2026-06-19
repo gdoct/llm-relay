@@ -4,19 +4,15 @@ Two configs, one shared token. Pick a token and use the same value on both sides
 
 ## 1. Deploy the server on your Docker host
 
-Edit [server-config.yaml](server-config.yaml) — really only `auth_token` needs
-changing:
+Edit [.env](.env) and set the shared token:
 
-```yaml
-server:
-  listen_port: 1234        # WSL / LLM clients connect here
-  ws_port: 1235            # the Mac relay client connects here
-  host: "0.0.0.0"
-  auth_token: "change-me"  # pick a secret
+```dotenv
+RELAY_AUTH_TOKEN=your-long-random-token
 ```
 
-Build and run with Docker Compose (config is mounted, so edits don't need a
-rebuild — just restart):
+`server-config.yaml` now reads `auth_token` from that variable. Build and run
+with Docker Compose (config is mounted, so edits don't need a rebuild — just
+restart):
 
 ```bash
 docker compose up -d --build
@@ -46,7 +42,13 @@ client:
   server_url: "ws://YOUR_DOCKER_HOST:1235"  # the server's ws_port
   backend_host: "127.0.0.1"
   backend_port: 8080                        # llama-server's port
-  auth_token: "change-me"                   # same token as the server
+  auth_token: "${RELAY_AUTH_TOKEN}"         # same token as the server
+```
+
+Before starting the client, export the same token in your shell:
+
+```bash
+export RELAY_AUTH_TOKEN=your-long-random-token
 ```
 
 Then:

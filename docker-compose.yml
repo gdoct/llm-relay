@@ -6,6 +6,8 @@ services:
       network: host
     image: llm-relay-server
     restart: unless-stopped
+    env_file:
+      - .env
     ports:
       - "1234:1234"   # consumers (WSL) connect here
       - "1235:1235"   # Mac relay client (WebSocket) connects here

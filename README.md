@@ -37,3 +37,12 @@ Written for Python 3.13. Uses `uv`, `pytest`, `flake8`, `black`, `pyright`.
 
 See [QUICKSTART.md](QUICKSTART.md) for setup and [DEVELOPMENT.md](DEVELOPMENT.md)
 for the protocol and internals.
+
+## Shared secret
+
+The relay token is read from `RELAY_AUTH_TOKEN`.
+
+- Put the value in `.env` for Docker Compose and the server container.
+- Set the same value in your client shell before running the client, or keep
+  `client-config.yaml` pointed at `${RELAY_AUTH_TOKEN}` and export it in the
+  environment that launches the client.

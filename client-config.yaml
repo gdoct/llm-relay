@@ -3,4 +3,4 @@ client:
   server_url: "ws://YOUR_DOCKER_HOST:1235"  # the Docker server's ws_port
   backend_host: "127.0.0.1"                 # where llama-server listens
   backend_port: 8080                        # llama-server port
-  auth_token: "change-me"                   # must match the server
+  auth_token: "${RELAY_AUTH_TOKEN}"         # must match the server

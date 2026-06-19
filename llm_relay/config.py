@@ -17,6 +17,7 @@ A file contains exactly one of these keys.
 """
 
 from dataclasses import dataclass
+import os
 from pathlib import Path
 from typing import Any, Optional
 
@@ -83,5 +84,6 @@ class RelayConfig:
         if not path.exists():
             raise FileNotFoundError(f"Configuration file not found: {config_path}")
         with open(path) as f:
-            data: dict[str, Any] = yaml.safe_load(f) or {}
+            raw_config = os.path.expandvars(f.read())
+            data: dict[str, Any] = yaml.safe_load(raw_config) or {}
         return cls.from_dict(data)
