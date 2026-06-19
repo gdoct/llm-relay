@@ -1,0 +1,6 @@
+# Relay SERVER config — runs on your Docker host.
+server:
+  listen_port: 1234        # WSL / LLM clients connect here (plain TCP/HTTP)
+  ws_port: 1235            # the Mac relay client connects here (WebSocket)
+  host: "0.0.0.0"          # bind on all interfaces inside the container
+  auth_token: "change-me"  # shared secret; must match the client

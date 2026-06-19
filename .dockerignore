@@ -1,0 +1,8 @@
+.venv
+.git
+.gitignore
+.pytest_cache
+**/__pycache__
+tests
+*.md
+!README.md
